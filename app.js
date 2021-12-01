@@ -12,7 +12,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 100 },
+      gravity: { y: 300 },
       debug: false
     }
   }
@@ -25,8 +25,8 @@ function preload() {
   this.load.image('island', 'assets/img/island.png');
   this.load.image('star', 'assets/img/star.png');
   this.load.spritesheet('player', 'assets/img/player.png', {
-    frameWidth: 32,
-    frameHeight: 48
+    frameWidth: 150,
+    frameHeight: 150
   })
 }
 
@@ -97,21 +97,19 @@ function create() {
     this
   )
 }
-
 function update() { 
   if (cursors.left.isDown) {
     player.setVelocityX(-160);
-    player.anims.play('left', true);
   } else if (cursors.right.isDown) {
     player.setVelocityX(160);
-    player.anims.play('right', true);
   } else if (cursors.up.isDown){
-    player.setAccelerationY(-160);
+    player.setAccelerationY(-360);
   } else{
     player.setAccelerationY(160);
   }
   
 }
+
 
 let player;
 
