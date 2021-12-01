@@ -25,8 +25,8 @@ function preload() {
   this.load.image('island', 'assets/img/island.png');
   this.load.image('star', 'assets/img/star.png');
   this.load.spritesheet('player', 'assets/img/player.png', {
-    frameWidth: 150,
-    frameHeight: 150
+    frameWidth: 100,
+    frameHeight: 100
   })
 }
 
@@ -34,21 +34,17 @@ function create() {
 
   let platforms = this.physics.add.staticGroup();
   platforms.create(400, 588, "ground");
-  platforms.create(600, 450, "island");
-  platforms.create(50, 250, "island");
-  platforms.create(650, 220, "island");
-  platforms.create(250, 520, "island");
-  platforms.create(250, 320, "island");
+  
 
-  let stars = this.physics.add.group();
-  stars.create(22, 0, "star");
-  stars.create(122, 0, "star");
-  stars.create(222, 0, "star");
-  stars.create(322, 0, "star");
-  stars.create(422, 0, "star");
-  stars.create(522, 0, "star");
-  stars.create(622, 0, "star");
-  stars.create(722, 0, "star");
+  let stars = this.physics.add.staticGroup();
+  stars.create(22, 100, "star");
+  stars.create(122, 200, "star");
+  stars.create(222, 50, "star");
+  stars.create(322, 250, "star");
+  stars.create(422, 100, "star");
+  stars.create(522, 60, "star");
+  stars.create(622, 260, "star");
+  stars.create(722, 50, "star");
 
   
   player = this.physics.add.sprite(380, 500, "player");
