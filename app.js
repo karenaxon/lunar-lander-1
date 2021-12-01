@@ -3,7 +3,7 @@ import Phaser from 'phaser'
 const config = {
   width: 800,
   height: 600,
-  backgroundColor: 0xffffff,
+  backgroundColor: 0x000000,
   scene: {
     preload,
     create,
@@ -12,7 +12,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 100 },
+      gravity: { y: 80 },
       debug: false
     }
   }
@@ -26,7 +26,7 @@ function preload() {
   this.load.image('star', 'assets/img/star.png');
   this.load.spritesheet('player', 'assets/img/player.png', {
     frameWidth: 32,
-    frameHeight: 48
+    frameHeight: 32
   })
 }
 
@@ -34,21 +34,17 @@ function create() {
 
   let platforms = this.physics.add.staticGroup();
   platforms.create(400, 588, "ground");
-  platforms.create(600, 450, "island");
-  platforms.create(50, 250, "island");
-  platforms.create(650, 220, "island");
-  platforms.create(250, 520, "island");
-  platforms.create(250, 320, "island");
+  
 
-  let stars = this.physics.add.group();
-  stars.create(22, 0, "star");
-  stars.create(122, 0, "star");
-  stars.create(222, 0, "star");
-  stars.create(322, 0, "star");
-  stars.create(422, 0, "star");
-  stars.create(522, 0, "star");
-  stars.create(622, 0, "star");
-  stars.create(722, 0, "star");
+  let stars = this.physics.add.staticGroup();
+  stars.create(22, 100, "star");
+  stars.create(122, 200, "star");
+  stars.create(222, 50, "star");
+  stars.create(322, 250, "star");
+  stars.create(422, 100, "star");
+  stars.create(522, 60, "star");
+  stars.create(622, 260, "star");
+  stars.create(722, 50, "star");
 
   
   player = this.physics.add.sprite(380, 500, "player");
@@ -82,7 +78,7 @@ function create() {
   let score = 0
   let scoreText = this.add.text(16, 16, "Stars: 0", {
     fontSize: "32px",
-    fill: "#000",
+    fill: "#ffffff",
   })
 
   this.physics.add.overlap(
@@ -97,21 +93,32 @@ function create() {
     this
   )
 }
+function update ()
+{
+    if (cursors.up.isDown)
+    {
+        this.physics.velocityFromRotation(player.rotation, 200, player.body.acceleration);
+    }
+    else
+    {
+        player.setAcceleration(0);
+    }
 
-function update() { 
-  if (cursors.left.isDown) {
-    player.setVelocityX(-160);
-    player.anims.play('left', true);
-  } else if (cursors.right.isDown) {
-    player.setVelocityX(160);
-    player.anims.play('right', true);
-  } else if (cursors.up.isDown){
-    player.setAccelerationY(-160);
-  } else{
-    player.setAccelerationY(160);
-  }
+    if (cursors.left.isDown)
+    {
+        player.setAngularVelocity(-300);
+    }
+    else if (cursors.right.isDown)
+    {
+        player.setAngularVelocity(300);
+    }
+    else
+    {
+        player.setAngularVelocity(0);
+    }
   
 }
+
 
 let player;
 
