@@ -34,7 +34,6 @@ function create() {
   let platforms = this.physics.add.staticGroup();
   let mountain = platforms.create(400, 500, "mountain");
   
-
   let stars = this.physics.add.staticGroup();
   stars.create(22, 100, "star");
   stars.create(122, 200, "star");
@@ -45,7 +44,6 @@ function create() {
   stars.create(622, 260, "star");
   stars.create(722, 50, "star");
 
-  
   ship = this.physics.add.sprite(380, 500, "ship");
   ship.setCollideWorldBounds(true);
   this.physics.add.collider(ship, platforms);
@@ -85,6 +83,7 @@ function create() {
     this
   )
 }
+
 function update ()
 {
   if (cursors.up.isDown)
@@ -114,4 +113,4 @@ function update ()
 
 let ship;
 
-let cursors;  
+let cursors;
