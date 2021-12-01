@@ -12,7 +12,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 100 },
       debug: false
     }
   }
@@ -105,14 +105,12 @@ function update() {
   } else if (cursors.right.isDown) {
     player.setVelocityX(160);
     player.anims.play('right', true);
-  } else {
-    player.setVelocityX(0);
-    player.anims.play('still');
+  } else if (cursors.up.isDown){
+    player.setAccelerationY(-160);
+  } else{
+    player.setAccelerationY(160);
   }
-
-  if (cursors.up.isDown && player.body.touching.down) {
-    player.setVelocityY(-330);
-  }
+  
 }
 
 let player;
