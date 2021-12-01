@@ -21,7 +21,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 function preload() {
-  this.load.image('mountain', 'assets/img/mountain.sprite.png');
+  this.load.image('mountain', 'assets/img/mountain.png');
   this.load.image('star', 'assets/img/star.png');
   this.load.spritesheet('ship', 'assets/img/ship.png', {
     frameWidth: 32,
@@ -53,6 +53,19 @@ function create() {
   this.physics.add.collider(mountain, platforms);
 
   cursors = this.input.keyboard.createCursorKeys();
+  
+  this.anims.create({
+    key: 'up',
+    frames: this.anims.generateFrameNumbers('ship', { start: 0, end: 1 }),
+    frameRate: 30,
+    repeat: -1
+  })
+
+  this.anims.create({
+    key: 'still',
+    frames: [{ key: 'ship', frame: 4 }],
+    frameRate: 20
+  })
 
   let score = 0
   let scoreText = this.add.text(16, 16, "Stars: 0", {
@@ -74,27 +87,29 @@ function create() {
 }
 function update ()
 {
-    if (cursors.up.isDown)
-    {
-        this.physics.velocityFromRotation(ship.rotation, 200, ship.body.acceleration);
-    }
-    else
-    {
-        ship.setAcceleration(0);
-    }
+  if (cursors.up.isDown)
+  {
+    ship.anims.play('up', true);
+    this.physics.velocityFromRotation(ship.rotation, 200, ship.body.acceleration);
+  }
+  else
+  {
+    ship.anims.play('still');
+    ship.setAcceleration(0);
+  }
 
-    if (cursors.left.isDown)
-    {
-        ship.setAngularVelocity(-300);
-    }
-    else if (cursors.right.isDown)
-    {
-        ship.setAngularVelocity(300);
-    }
-    else
-    {
-        ship.setAngularVelocity(0);
-    } 
+  if (cursors.left.isDown)
+  {
+    ship.setAngularVelocity(-300);
+  }
+  else if (cursors.right.isDown)
+  {
+    ship.setAngularVelocity(300);
+  }
+  else
+  {
+    ship.setAngularVelocity(0);
+  }
 }
 
 let ship;
