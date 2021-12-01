@@ -115,8 +115,7 @@ function update ()
     else
     {
         player.setAngularVelocity(0);
-    }
-  
+    } 
 }
 
 
