@@ -35,14 +35,9 @@ function create() {
   let mountain = platforms.create(400, 500, "mountain");
   
   let stars = this.physics.add.staticGroup();
-  stars.create(22, 100, "star");
-  stars.create(122, 200, "star");
-  stars.create(222, 50, "star");
-  stars.create(322, 250, "star");
-  stars.create(422, 100, "star");
-  stars.create(522, 60, "star");
-  stars.create(622, 260, "star");
-  stars.create(722, 50, "star");
+  for (let i = 0; i < 8; i++) {
+    stars.create(Math.floor(Math.random() * 700 + 50), Math.floor(Math.random() * 250 + 50), "star");
+  }
 
   ship = this.physics.add.sprite(380, 500, "ship");
   ship.setCollideWorldBounds(true);
@@ -61,7 +56,7 @@ function create() {
 
   this.anims.create({
     key: 'still',
-    frames: [{ key: 'ship', frame: 4 }],
+    frames: [{ key: 'ship', frame: 1 }],
     frameRate: 20
   })
 
@@ -86,10 +81,11 @@ function create() {
 
 function update ()
 {
-  if (cursors.up.isDown)
+  if (cursors.up.isDown && fuel > 0)
   {
     ship.anims.play('up', true);
     this.physics.velocityFromRotation(ship.rotation, 200, ship.body.acceleration);
+    fuel--;
   }
   else
   {
@@ -114,3 +110,5 @@ function update ()
 let ship;
 
 let cursors;
+
+let fuel = 2000;
