@@ -21,7 +21,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 function preload() {
-  this.load.image('ground', 'assets/img/ground.png');
+  this.load.image('mountain', 'assets/img/mountain.sprite.png');
   this.load.image('island', 'assets/img/island.png');
   this.load.image('star', 'assets/img/star.png');
   this.load.spritesheet('player', 'assets/img/player.png', {
@@ -33,7 +33,7 @@ function preload() {
 function create() {
 
   let platforms = this.physics.add.staticGroup();
-  platforms.create(400, 588, "ground");
+  let mountain = platforms.create(400, 500, "mountain");
   
 
   let stars = this.physics.add.staticGroup();
@@ -48,32 +48,12 @@ function create() {
 
   
   player = this.physics.add.sprite(380, 500, "player");
-  player.setBounce(0.2);
   player.setCollideWorldBounds(true);
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(stars, platforms);
+  this.physics.add.collider(mountain, platforms);
 
   cursors = this.input.keyboard.createCursorKeys();
-
-  this.anims.create({
-    key: 'still',
-    frames: [{ key: 'player', frame: 4 }],
-    frameRate: 20
-  })
-  
-  this.anims.create({
-    key: 'left',
-    frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
-    frameRate: 10,
-    repeat: -1
-  })
-  
-  this.anims.create({
-    key: 'right',
-    frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
-    frameRate: 10,
-    repeat: -1
-  })
 
   let score = 0
   let scoreText = this.add.text(16, 16, "Stars: 0", {
@@ -118,7 +98,6 @@ function update ()
     } 
 }
 
-
 let player;
 
-let cursors;
+let cursors;  
