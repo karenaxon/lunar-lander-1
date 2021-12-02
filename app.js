@@ -35,12 +35,12 @@ function preload() {
 function create() {
   this.music = this.sound.add("game");
   this.starSound = this.sound.add("coin");
-  let platforms = this.physics.add.staticGroup();
-  let background = platforms.create(0, 0, "background");
-  let mountain = platforms.create(400, 500, "mountain");
+  let mountains = this.physics.add.staticGroup();
+  let background = mountains.create(0, 0, "background");
+  let mountain = mountains.create(400, 500, "mountain");
   let musicConfig = {
     mute: false,
-    volume: 1,
+    volume: 0.1,
     rate: 1,
     detune: 0,
     seek: 0,
@@ -55,9 +55,8 @@ function create() {
 
   ship = this.physics.add.sprite(380, 380, "ship");
   ship.setCollideWorldBounds(true);
-  this.physics.add.collider(ship, platforms);
-  this.physics.add.collider(stars, platforms);
-  this.physics.add.collider(mountain, platforms);
+  this.physics.add.collider(ship, mountains);
+  this.physics.add.collider(stars, mountains);
 
   cursors = this.input.keyboard.createCursorKeys();
   
