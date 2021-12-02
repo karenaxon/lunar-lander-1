@@ -79,7 +79,7 @@ function create() {
     fill: "#ffffff",
   })
   
-  let fuelText = this.add.text(16, 50, "Fuel: 0", {
+  let fuelText = this.add.text(16, 55, "Fuel: 0", {
     fontSize: "32px",
     fill: "#ffffff",
   })
@@ -142,8 +142,7 @@ function update ()
   }
 
   if (fuel === 0 && Math.abs(ship.body.velocity.x) === 0 && Math.abs(ship.body.velocity.y) === 0) {
-    console.log((ship.body.velocity));
-    let gameoverText = this.add.text(175, 200, "Game Over: Score = " + score, {
+    let gameoverText = this.add.text(150, 200, "Game Over: Score = " + score, {
       fontSize: "40px",
       fill: "#ffffff",
     })
@@ -155,5 +154,5 @@ let ship;
 
 let cursors;
 
-let fuel = 300;
+let fuel = 3000;
 let score = 0;
