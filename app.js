@@ -36,7 +36,7 @@ function create() {
   let mountain = platforms.create(400, 500, "mountain");
   let musicConfig = {
     mute: false,
-    valume: 1,
+    volume: 0.1,
     rate: 1,
     detune: 0,
     seek: 0,
@@ -50,6 +50,7 @@ function create() {
   }
 
   ship = this.physics.add.sprite(380, 500, "ship");
+  ship.body.setMaxSpeed(100);
   ship.setCollideWorldBounds(true);
   this.physics.add.collider(ship, platforms);
   this.physics.add.collider(stars, platforms);
