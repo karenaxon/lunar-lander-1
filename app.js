@@ -53,7 +53,7 @@ function create() {
     stars.create(Math.floor(Math.random() * 700 + 50), Math.floor(Math.random() * 250 + 50), "star");
   }
 
-  ship = this.physics.add.sprite(380, 500, "ship");
+  ship = this.physics.add.sprite(380, 380, "ship");
   ship.setCollideWorldBounds(true);
   this.physics.add.collider(ship, platforms);
   this.physics.add.collider(stars, platforms);
@@ -111,15 +111,12 @@ function create() {
 
 function update ()
 {
-  let shipFuel = this.add.text(200, 200, `Fuel: ${fuel}`)
-
   if (cursors.up.isDown && fuel > 0)
   {
     ship.anims.play('up', true);
     this.physics.velocityFromRotation(ship.rotation, 200, ship.body.acceleration);
     
     fuel--;
-    shipFuel;
   }
   else
   {
