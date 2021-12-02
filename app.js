@@ -36,7 +36,7 @@ function create() {
   let mountain = platforms.create(400, 500, "mountain");
   let musicConfig = {
     mute: false,
-    valume: 1,
+    volume: 1,
     rate: 1,
     detune: 0,
     seek: 0,
