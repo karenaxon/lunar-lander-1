@@ -50,7 +50,6 @@ function create() {
   }
 
   ship = this.physics.add.sprite(380, 500, "ship");
-  ship.body.setMaxSpeed(100);
   ship.setCollideWorldBounds(true);
   this.physics.add.collider(ship, platforms);
   this.physics.add.collider(stars, platforms);
@@ -71,8 +70,13 @@ function create() {
     frameRate: 20
   })
 
-  let score = 0
+  let score = 0;
   let scoreText = this.add.text(16, 16, "Stars: 0", {
+    fontSize: "32px",
+    fill: "#ffffff",
+  })
+  
+  let fuelText = this.add.text(16, 50, "Fuel: 0", {
     fontSize: "32px",
     fill: "#ffffff",
   })
@@ -83,7 +87,8 @@ function create() {
     (ship, star) => {
       star.disableBody(true, true)
       score += 1
-      scoreText.setText("Stars: " + score)
+      scoreText.setText("Stars: " + score);
+      fuelText.setText("Fuel: " + fuel);
     },
     null,
     this
