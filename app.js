@@ -27,13 +27,23 @@ function preload() {
     frameWidth: 32,
     frameHeight: 32
   })
+  this.load.audio("game", "assets/sounds/game.mp3");
 }
 
 function create() {
-
+  this.music = this.sound.add("game");
   let platforms = this.physics.add.staticGroup();
   let mountain = platforms.create(400, 500, "mountain");
-  
+  let musicConfig = {
+    mute: false,
+    valume: 1,
+    rate: 1,
+    detune: 0,
+    seek: 0,
+    loop: false,
+    delay: 0
+  }
+  this.music.play(musicConfig);
   let stars = this.physics.add.staticGroup();
   for (let i = 0; i < 8; i++) {
     stars.create(Math.floor(Math.random() * 700 + 50), Math.floor(Math.random() * 250 + 50), "star");
@@ -112,3 +122,4 @@ let ship;
 let cursors;
 
 let fuel = 2000;
+
