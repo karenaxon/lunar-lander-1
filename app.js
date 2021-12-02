@@ -74,7 +74,6 @@ function create() {
     frameRate: 20
   })
 
-  let score = 0;
   let scoreText = this.add.text(16, 16, "Stars: 0", {
     fontSize: "32px",
     fill: "#ffffff",
@@ -141,10 +140,20 @@ function update ()
   {
     ship.setAngularVelocity(0);
   }
+
+  if (fuel === 0 && Math.abs(ship.body.velocity.x) === 0 && Math.abs(ship.body.velocity.y) === 0) {
+    console.log((ship.body.velocity));
+    let gameoverText = this.add.text(175, 200, "Game Over: Score = " + score, {
+      fontSize: "40px",
+      fill: "#ffffff",
+    })
+    fuel = -1;
+  }
 }
 
 let ship;
 
 let cursors;
 
-let fuel = 3000;
+let fuel = 300;
+let score = 0;
