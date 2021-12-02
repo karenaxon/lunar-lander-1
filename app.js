@@ -50,6 +50,7 @@ function create() {
   }
 
   ship = this.physics.add.sprite(380, 500, "ship");
+  ship.body.setMaxSpeed(100);
   ship.setCollideWorldBounds(true);
   this.physics.add.collider(ship, platforms);
   this.physics.add.collider(stars, platforms);
