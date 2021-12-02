@@ -23,6 +23,7 @@ const game = new Phaser.Game(config);
 function preload() {
   this.load.image('mountain', 'assets/img/mountain.png');
   this.load.image('star', 'assets/img/star.png');
+  this.load.image('background', 'assets/img/background.png');
   this.load.spritesheet('ship', 'assets/img/ship.png', {
     frameWidth: 32,
     frameHeight: 32
@@ -33,6 +34,7 @@ function preload() {
 function create() {
   this.music = this.sound.add("game");
   let platforms = this.physics.add.staticGroup();
+  let background = platforms.create(0, 0, "background");
   let mountain = platforms.create(400, 500, "mountain");
   let musicConfig = {
     mute: false,
@@ -86,8 +88,17 @@ function create() {
     stars,
     (ship, star) => {
       star.disableBody(true, true)
-      score += 1
+      score += 1;
       scoreText.setText("Stars: " + score);
+    },
+    null,
+    this
+  )
+
+  this.physics.add.overlap(
+    ship,
+    background,
+    (ship, star) => {
       fuelText.setText("Fuel: " + fuel);
     },
     null,
