@@ -93,6 +93,11 @@ function create() {
       star.disableBody(true, true)
       score += 1;
       scoreText.setText("Stars: " + score);
+      if (score % 8 === 0) {
+        for (let i = 0; i < 8; i++) {
+          stars.create(Math.floor(Math.random() * 700 + 50), Math.floor(Math.random() * 250 + 50), "star");
+        }
+      }
     },
     null,
     this
@@ -142,5 +147,4 @@ let ship;
 
 let cursors;
 
-let fuel = 2000;
-
+let fuel = 3000;
