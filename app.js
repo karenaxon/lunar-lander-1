@@ -28,15 +28,17 @@ function preload() {
     frameHeight: 32
   })
   this.load.audio("game", "assets/sounds/game.mp3");
+  this.load.audio("coin", "assets/sounds/coin.mp3")
 }
 
 function create() {
   this.music = this.sound.add("game");
+  this.starSound = this.sound.add("coin");
   let platforms = this.physics.add.staticGroup();
   let mountain = platforms.create(400, 500, "mountain");
   let musicConfig = {
     mute: false,
-    valume: 1,
+    volume: 1,
     rate: 1,
     detune: 0,
     seek: 0,
@@ -80,6 +82,7 @@ function create() {
     ship,
     stars,
     (ship, star) => {
+      this.starSound.play()
       star.disableBody(true, true)
       score += 1
       scoreText.setText("Stars: " + score)
@@ -91,11 +94,15 @@ function create() {
 
 function update ()
 {
+  let shipFuel = this.add.text(200, 200, `Fuel: ${fuel}`)
+
   if (cursors.up.isDown && fuel > 0)
   {
     ship.anims.play('up', true);
     this.physics.velocityFromRotation(ship.rotation, 200, ship.body.acceleration);
+    
     fuel--;
+    shipFuel;
   }
   else
   {
